@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, Image, FlatList, TouchableOpacity,Dimensions,StyleSheet } from "react-native";
 const { width } = Dimensions.get('window');
-// const height = width * 0.2844;
+const height = width * 0.2844;
 const items = [
     {id: 1, ag: 'user 1', name: 'https://cdn.pixabay.com/photo/2015/02/09/20/03/koala-630117__340.jpg'},
     {id: 2, ag: 'user 2', name: 'https://cdn.pixabay.com/photo/2019/07/25/01/38/kangaroo-4361467__340.jpg'},
