@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, Image, FlatList, TouchableOpacity,Platform,StyleSheet } from "react-native";
-
+import {View, Text, ScrollView, Image, FlatList, TouchableOpacity,Dimensions,StyleSheet } from "react-native";
+const { width } = Dimensions.get('window');
+// const height = width * 0.2844;
 const items = [
     {id: 1, ag: 'user 1', name: 'https://cdn.pixabay.com/photo/2015/02/09/20/03/koala-630117__340.jpg'},
     {id: 2, ag: 'user 2', name: 'https://cdn.pixabay.com/photo/2019/07/25/01/38/kangaroo-4361467__340.jpg'},
@@ -8,29 +9,39 @@ const items = [
     {id: 4, ag: 'user 4', name: 'https://cdn.pixabay.com/photo/2019/07/25/01/38/kangaroo-4361467__340.jpg'},
     {id: 5, ag: 'user 5', name: 'https://cdn.pixabay.com/photo/2019/07/25/01/38/kangaroo-4361467__340.jpg'},
 ]
+const asd = [
+    {
+        id: 20,
+        TenBaiHat: "Tình Đẹp Đến Mấy Cũng Tàn",
+        HinhBaiHat: "https://photo-resize-zmp3.zadn.vn/w94_r1x1_jpeg/cover/7/3/2/5/73257d3f2cb6b1c16719bebc443980f9.jpg",
+        NoiDungQuangCao: "Câu Lạc Bộ Hits Vol 4",
+        HinhanhQuangCao: "https://nhom1mp3.000webhostapp.com/public/images/banner/8.jpg"
+    },
+    {
+        id: 56,
+        TenBaiHat: "Cô Đơn Không Muốn Về Nhà",
+        HinhBaiHat: "https://i.ytimg.com/vi/rH7e4hXtYGA/hqdefault.jpg",
+        NoiDungQuangCao: "Hit Mới Nhất Của Mr Siro",
+        HinhanhQuangCao: "https://nhom1mp3.000webhostapp.com/public/images/banner/cdkmvn.jpg"
+    },
+    {
+        id: 57,
+        TenBaiHat: "Hơn Cả Yêu",
+        HinhBaiHat: "https://billboardvn.vn/wp-content/uploads/2020/02/vlcsnap-2020-02-08-12h49m54s975.png",
+        NoiDungQuangCao: "Ca khúc mới nhất của Đức Phúc",
+        HinhanhQuangCao: "https://nhom1mp3.000webhostapp.com/public/images/banner/hcy.png"
+    }
+]
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: items,
-            position: 1,
-            interval: null,
-            dataSource: [
-                {
-                    title: 'Title 1',
-                    caption: 'Caption 1',
-                    url: 'https://reactnativecode.000webhostapp.com/images/dahlia-red-blossom-bloom-60597.jpeg',
-                }, {
-                    title: 'Title 2',
-                    caption: 'Caption 2',
-                    url: 'https://reactnativecode.000webhostapp.com/images/flower-impala-lily-floral-plant-65653.jpeg',
-                }, {
-                    title: 'Title 3',
-                    caption: 'Caption 3',
-                    url: 'https://reactnativecode.000webhostapp.com/images/flowers-background-butterflies-beautiful-87452.jpeg',
-                },
-            ],
+            search: '',
+            sliderIndex: 0,
+            maxSlider: 2,
+            banners: asd,
 
         }
         this.componentDidMount();
@@ -98,12 +109,65 @@ class Home extends Component {
                 console.error(error);
             });
     }
+    setRef = (c) => {
+        this.listRef = c;
+    }
 
+    scrollToIndex = (index, animated) => {
+        this.listRef && this.listRef.scrollToIndex({ index, animated })
+    }
+
+    componentWillMount() {
+        setInterval(function() {
+            const { sliderIndex, maxSlider } = this.state
+            let nextIndex = 0
+
+            if (sliderIndex < maxSlider) {
+                nextIndex = sliderIndex + 1
+            }
+
+            this.scrollToIndex(nextIndex, true)
+            this.setState({sliderIndex: nextIndex})
+        }.bind(this), 3000)
+    }
     render() {
         return (
             <ScrollView>
                 <View style={{flex: 1}}>
-
+                    <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+                        <FlatList
+                            ref={this.setRef}
+                            data={this.state.banners}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            pagingEnabled
+                            keyExtractor={item => item._id}
+                            renderItem={({item, i}) => (
+                                <View key={i} style={{ height:180, width}}>
+                                    <Image style={{ height:180, width }} source={{ uri: item.HinhanhQuangCao }} />
+                                </View>
+                            )}
+                            onMomentumScrollEnd={(event) => {
+                                let sliderIndex = event.nativeEvent.contentOffset.x ? event.nativeEvent.contentOffset.x/width : 0
+                                this.setState({sliderIndex})
+                            }}
+                        />
+                        <View style={styles.sliderContainer}>
+                            {
+                                this.state.banners.map(function(item, index) {
+                                    return (
+                                        <View key={index} style={styles.sliderBtnContainer}>
+                                            <View style={styles.sliderBtn}>
+                                                {
+                                                    this.state.sliderIndex == index ? <View style={styles.sliderBtnSelected}/> : null
+                                                }
+                                            </View>
+                                        </View>
+                                    )
+                                }.bind(this))
+                            }
+                        </View>
+                    </ScrollView>
                     <View>
                         <View style={{alignItems:'center',color:'#cbcbcb', marginBottom:15, marginTop:15}}><Text style={{fontSize:28}}>GIAI ĐIỆU CẢM XÚC</Text></View>
                         <FlatList
@@ -253,13 +317,38 @@ class Home extends Component {
 
 export default Home;
 const styles = StyleSheet.create({
-
-    MainContainer: {
+    container: {
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-        backgroundColor: '#FFF8E1'
-
-    }
-
+        backgroundColor: '#F5FCFF',
+    },
+    scrollContainer: {
+        flex: 1
+    },
+    sliderContainer: {
+        flexDirection: 'row',
+        position: 'absolute',
+        top: 150,
+        alignSelf: 'center'
+    },
+    sliderBtn: {
+        height: 13,
+        width: 13,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 10
+    },
+    sliderBtnSelected: {
+        height: 12,
+        width: 12,
+        borderRadius: 6,
+        backgroundColor: 'white',
+    },
+    sliderBtnContainer: {
+        flexDirection: 'row', marginBottom: 24
+    },
 });
