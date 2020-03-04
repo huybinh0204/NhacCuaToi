@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 import Following from "../pages/Following";
 import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
-import Login from "../login/Login";
+import HomePlay from "../pages/playnhac/Home_Play";
 export const HomeNavigator = createStackNavigator({
     Home: { screen: Home,navigationOptions:{
             header:null,
@@ -28,10 +28,11 @@ export const MenuNavigator = createStackNavigator({
             header:null,
         }}
 });
-export const LoginNavigator = createStackNavigator({
-    Login: { screen: Login ,
+export const HomePlayNavigator = createStackNavigator({
+    HomePlay: { screen: HomePlay ,
         navigationOptions:{
             header:null,
         }}
 });
+
 

@@ -4,8 +4,7 @@ import {
     HomeNavigator,
     FollowingNavigator,
     MenuNavigator,
-    CartNavigator,
-    LoginNavigator
+    HomePlayNavigator
 } from './screen-stack-navigator';
 import {Image} from 'react-native';
 import {createAppContainer} from "react-navigation";
@@ -26,6 +25,11 @@ const BottomTabNavigator = createBottomTabNavigator(
         },
         Menu: {
             screen: MenuNavigator,
+            navigationOptions: {
+                tabBarLabel: 'Profile',
+            },
+        },HomePlay: {
+            screen: HomePlayNavigator,
             navigationOptions: {
                 tabBarLabel: 'Profile',
             },
@@ -65,6 +69,20 @@ const BottomTabNavigator = createBottomTabNavigator(
                         />
                     );
                 }else if (routeName === 'Menu') {
+                    return (
+                        <Image
+                            source={
+                                focused
+                                    ? require('../../asset/icon/user_click.png')
+                                    : require('../../asset/icon/user.png')
+                            }
+                            style={{
+                                width: 20,
+                                height: 20,
+                            }}
+                        />
+                    );
+                }else if (routeName === 'HomePlay') {
                     return (
                         <Image
                             source={
