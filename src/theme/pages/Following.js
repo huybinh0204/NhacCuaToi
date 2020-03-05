@@ -70,7 +70,6 @@ class Following extends Component {
         const newData = this.arrayholder.filter(item => {
             const itemData = `${item.TenBaiHat.toUpperCase()}`;
             const textData = text.toUpperCase();
-
             return itemData.indexOf(textData) > -1;
         });
         this.setState({
@@ -104,7 +103,7 @@ class Following extends Component {
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) =>
-                        <TouchableOpacity>{
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate('HomePlay')}}>{
                             (
                                 <ListItem
                                     leftAvatar={{source: {uri: item.HinhBaiHat}}}

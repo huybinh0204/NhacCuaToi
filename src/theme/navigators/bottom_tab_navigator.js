@@ -15,6 +15,7 @@ import NewPlatAlbum from "../pages/playnhac/New_Plat_Album";
 import NewPlay from "../pages/playnhac/New_Play";
 import NewPlatPlaylist from "../pages/playnhac/New_Plat_Playlist";
 import NewPlatChuDe from "../pages/playnhac/New_Plat_ChuDe";
+import HomePlay from "../pages/playnhac/Home_Play";
 const MenuD = createBottomTabNavigator(
     {
         Home: {
@@ -94,6 +95,7 @@ const MenuD = createBottomTabNavigator(
         },
     },
 );
+
 const BottomTabNavigator = createStackNavigator(
     {
         MenuD: {
@@ -120,6 +122,11 @@ const BottomTabNavigator = createStackNavigator(
             }
         },NewPlatChuDe: {
             screen: NewPlatChuDe,
+            navigationOptions: {
+                header: null,
+            }
+        },HomePlay: {
+            screen: HomePlay,
             navigationOptions: {
                 header: null,
             }

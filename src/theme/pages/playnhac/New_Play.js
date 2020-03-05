@@ -42,7 +42,7 @@ class NewPlay extends Component {
                 <ScrollView style={{marginTop: 30}}>
                     <FlatList
                         data={this.state.dataSource_A} renderItem={({item}) =>
-                        <TouchableOpacity style={{flex: 1, borderBottomWidth: 1, borderColor: '#cbcbcb', flexDirection:'row'}}>
+                        <TouchableOpacity onPress={()=>{this.props.navigation.navigate('HomePlay')}} style={{flex: 1, borderBottomWidth: 1, borderColor: '#cbcbcb', flexDirection:'row'}}>
                             <View style={{margin:10}}>
                                 <Image style={{height: 50, width: 50, borderRadius: 50, padding:10}}
                                        source={{uri: item.HinhBaiHat}}/>
