@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text, Image, FlatList, ScrollView, TouchableOpacity, Alert, TextInput,ActivityIndicator} from "react-native";
-import { ListItem, SearchBar } from 'react-native-elements';
+import {
+    View,
+    Text,
+    Image,
+    FlatList,
+    ScrollView,
+    TouchableOpacity,
+    Alert,
+    TextInput,
+    ActivityIndicator
+} from "react-native";
+import {ListItem, SearchBar} from 'react-native-elements';
 
 
 class Following extends Component {
@@ -22,7 +32,7 @@ class Following extends Component {
 
     makeRemoteRequest = () => {
         const url = `https://nhacmp3vip.000webhostapp.com/api_appnhac/Baihat_Get.php`;
-        this.setState({ loading: true });
+        this.setState({loading: true});
 
         fetch(url)
             .then(res => res.json())
@@ -35,7 +45,7 @@ class Following extends Component {
                 this.arrayholder = res;
             })
             .catch(error => {
-                this.setState({ error, loading: false });
+                this.setState({error, loading: false});
             });
     };
 
@@ -58,7 +68,7 @@ class Following extends Component {
         });
 
         const newData = this.arrayholder.filter(item => {
-            const itemData = `${item.TenBaiHat.toUpperCase() }`;
+            const itemData = `${item.TenBaiHat.toUpperCase()}`;
             const textData = text.toUpperCase();
 
             return itemData.indexOf(textData) > -1;
@@ -71,7 +81,7 @@ class Following extends Component {
     renderHeader = () => {
         return (
             <SearchBar
-                placeholder="Type Here..."
+                placeholder="Tim Kiem"
                 lightTheme
                 round
                 onChangeText={text => this.searchFilterFunction(text)}
@@ -84,22 +94,27 @@ class Following extends Component {
     render() {
         if (this.state.loading) {
             return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <ActivityIndicator />
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <ActivityIndicator/>
                 </View>
             );
         }
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.data}
-                    renderItem={({ item }) => (
-                        <ListItem
-                            leftAvatar={{ source: { uri: item.HinhBaiHat } }}
-                            title={`${item.TenBaiHat} `}
-                            subtitle={item.CaSi}
-                        />
-                    )}
+                    renderItem={({item}) =>
+                        <TouchableOpacity>{
+                            (
+                                <ListItem
+                                    leftAvatar={{source: {uri: item.HinhBaiHat}}}
+                                    title={`${item.TenBaiHat} `}
+                                    subtitle={item.CaSi}
+                                />
+                            )
+                            }
+                        </TouchableOpacity>
+                    }
                     keyExtractor={item => item.email}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, Image, FlatList, TouchableOpacity,Dimensions,StyleSheet } from "react-native";
+import NewPlatAlbum from "./playnhac/New_Plat_Album";
 const { width } = Dimensions.get('window');
 const height = width * 0.2844;
 const items = [
@@ -172,7 +173,7 @@ class Home extends Component {
                         <View style={{alignItems:'center',color:'#cbcbcb', marginBottom:15, marginTop:15}}><Text style={{fontSize:28}}>GIAI ĐIỆU CẢM XÚC</Text></View>
                         <FlatList
                             data={this.state.dataSource} renderItem={({item}) =>
-                            <TouchableOpacity style={{
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NewPlatPlaylist')}} style={{
                                 marginLeft:10, marginRight:10, marginBottom:10,
                                 elevation: 3,
                                 orderRadius: 10,
@@ -191,7 +192,6 @@ class Home extends Component {
                                     </View>
                                 </View>
                             </TouchableOpacity>
-
                         }/>
                     </View>
                     <View style={{
@@ -206,7 +206,7 @@ class Home extends Component {
                         </Text>
                         <FlatList horizontal
                                   data={this.state.dataSource_M} renderItem={({item}) =>
-                            <TouchableOpacity tyle={{
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NewPlatChuDe')}}  tyle={{
                                 marginLeft: 10
                             }}>
                                 <Image style={{
@@ -235,7 +235,7 @@ class Home extends Component {
                         </Text>
                         <FlatList horizontal
                                   data={this.state.dataSource_K} renderItem={({item}) =>
-                            <TouchableOpacity tyle={{
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NewPlay')}} style={{
                                 marginLeft: 10
                             }}>
                                 <View style={{
@@ -277,7 +277,7 @@ class Home extends Component {
                         </Text>
                         <FlatList
                             data={this.state.dataSource_A} renderItem={({item}) => (
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NewPlatAlbum')}} >
                                 <View style={{
                                     padding: 10,
                                     borderRadius: 10,

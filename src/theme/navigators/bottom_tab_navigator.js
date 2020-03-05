@@ -4,12 +4,18 @@ import {
     HomeNavigator,
     FollowingNavigator,
     MenuNavigator,
-    HomePlayNavigator
+    HomePlayNavigator,
+    NewPlayPlayNavigator,
+    NewPlatAlbumPlayNavigator
 } from './screen-stack-navigator';
 import {Image} from 'react-native';
 import {createAppContainer} from "react-navigation";
-
-const BottomTabNavigator = createBottomTabNavigator(
+import {createStackNavigator} from 'react-navigation-stack';
+import NewPlatAlbum from "../pages/playnhac/New_Plat_Album";
+import NewPlay from "../pages/playnhac/New_Play";
+import NewPlatPlaylist from "../pages/playnhac/New_Plat_Playlist";
+import NewPlatChuDe from "../pages/playnhac/New_Plat_ChuDe";
+const MenuD = createBottomTabNavigator(
     {
         Home: {
             screen: HomeNavigator,
@@ -28,12 +34,8 @@ const BottomTabNavigator = createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: 'Profile',
             },
-        },HomePlay: {
-            screen: HomePlayNavigator,
-            navigationOptions: {
-                tabBarLabel: 'Profile',
-            },
-        },
+        }
+
     },
     {
         defaultNavigationOptions: ({navigation}) => ({
@@ -82,21 +84,8 @@ const BottomTabNavigator = createBottomTabNavigator(
                             }}
                         />
                     );
-                }else if (routeName === 'HomePlay') {
-                    return (
-                        <Image
-                            source={
-                                focused
-                                    ? require('../../asset/icon/user_click.png')
-                                    : require('../../asset/icon/user.png')
-                            }
-                            style={{
-                                width: 20,
-                                height: 20,
-                            }}
-                        />
-                    );
                 }
+
             }
         }),
         tabBarOptions: {
@@ -105,5 +94,40 @@ const BottomTabNavigator = createBottomTabNavigator(
         },
     },
 );
+const BottomTabNavigator = createStackNavigator(
+    {
+        MenuD: {
+            screen: MenuD, navigationOptions: {
+                header: null,
+            },
+        },
+        NewPlay:{
+            screen:NewPlay,
+            navigationOptions:{
+                header:null,
+            }
+        },
+        NewPlatAlbum:{
+            screen:NewPlatAlbum,
+            navigationOptions:{
+                header:null,
+            }
+        },
+        NewPlatPlaylist: {
+            screen: NewPlatPlaylist,
+            navigationOptions: {
+                header: null,
+            }
+        },NewPlatChuDe: {
+            screen: NewPlatChuDe,
+            navigationOptions: {
+                header: null,
+            }
+        },
+
+    },
+    {initialRouteName: 'MenuD', headerLayoutPreset: 'center'},
+);
+
 const BOTTOM1 = createAppContainer(BottomTabNavigator);
 export default BOTTOM1;

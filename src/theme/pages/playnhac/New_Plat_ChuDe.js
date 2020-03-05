@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, Image, FlatList, TouchableOpacity, StyleSheet, ImageBackground} from "react-native";
 
-class NewPlay extends Component {
+class NewPlatChuDe extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,7 +10,7 @@ class NewPlay extends Component {
     }
     componentDidMount_A() {
         return fetch(
-            'https://nhacmp3vip.000webhostapp.com/api_appnhac/TheLoaiBaiHat.php'
+            'https://nhacmp3vip.000webhostapp.com/api_appnhac/Chude_Get.php'
         )
             .then(response => response.json())
             .then(responseJson_a => {
@@ -32,10 +32,10 @@ class NewPlay extends Component {
                     <View style={{marginLeft: 20, marginTop: -130, flexDirection: 'row'}}>
                         <View>
                             <Image style={{height: 100, width: 100}}
-                                   source={{uri: "https://zmp3-photo-fbcrawler.zadn.vn/cover_video/c/4/2/a/c42ae785d99d2416ed3221d528ae4b39.jpg"}}/>
+                                   source={{uri: "https://zmp3-photo-fbcrawler.zadn.vn/cover_video/d/9/4/7/d947f25edd525df50067505e6621d47c.jpg"}}/>
                         </View>
                         <View>
-                            <Text style={{marginLeft: 10, fontSize: 20, color: '#fff', marginTop:30}}>V-Pop</Text>
+                            <Text style={{marginLeft: 10, fontSize: 20, color: '#fff', marginTop:30}}>Nhạc trẻ</Text>
                         </View>
                     </View>
                 </View>
@@ -45,11 +45,10 @@ class NewPlay extends Component {
                         <TouchableOpacity style={{flex: 1, borderBottomWidth: 1, borderColor: '#cbcbcb', flexDirection:'row'}}>
                             <View style={{margin:10}}>
                                 <Image style={{height: 50, width: 50, borderRadius: 50, padding:10}}
-                                       source={{uri: item.HinhBaiHat}}/>
+                                       source={{uri: item.HinhChuDe}}/>
                             </View>
-                            <View style={{marginLeft: 10 ,margin:10}}>
-                                <Text style={{fontSize:16}}>{item.TenBaiHat}</Text>
-                                <Text style={{fontSize:16 , color:'#888888'}}>{item.CaSi} </Text>
+                            <View style={{marginLeft: 10 ,margin:10, marginTop:20}}>
+                                <Text style={{fontSize:16}}>{item.TenChuDe}</Text>
                             </View>
 
                         </TouchableOpacity>
@@ -60,5 +59,5 @@ class NewPlay extends Component {
     }
 }
 
-export default NewPlay;
+export default NewPlatChuDe;
 const styles = StyleSheet.create({});

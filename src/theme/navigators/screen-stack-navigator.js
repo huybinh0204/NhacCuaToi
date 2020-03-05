@@ -5,6 +5,8 @@ import Following from "../pages/Following";
 import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
 import HomePlay from "../pages/playnhac/Home_Play";
+import NewPlay from "../pages/playnhac/New_Play";
+import NewPlatAlbum from "../pages/playnhac/New_Plat_Album";
 export const HomeNavigator = createStackNavigator({
     Home: { screen: Home,navigationOptions:{
             header:null,
@@ -30,6 +32,17 @@ export const MenuNavigator = createStackNavigator({
 });
 export const HomePlayNavigator = createStackNavigator({
     HomePlay: { screen: HomePlay ,
+        navigationOptions:{
+            header:null,
+        }}
+});
+export const NewPlayPlayNavigator = createStackNavigator({
+    NewPlay: { screen: NewPlay ,
+        navigationOptions:{
+            header:null,
+        }}
+});export const NewPlatAlbumPlayNavigator = createStackNavigator({
+    NewPlatAlbum: { screen: NewPlatAlbum ,
         navigationOptions:{
             header:null,
         }}

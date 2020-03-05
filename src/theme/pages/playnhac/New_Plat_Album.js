@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, Image, FlatList, TouchableOpacity, StyleSheet, ImageBackground} from "react-native";
 
-class NewPlay extends Component {
+class NewPlatAlbum extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,7 +10,7 @@ class NewPlay extends Component {
     }
     componentDidMount_A() {
         return fetch(
-            'https://nhacmp3vip.000webhostapp.com/api_appnhac/TheLoaiBaiHat.php'
+            'https://nhacmp3vip.000webhostapp.com/api_appnhac/AlbumBaiHat.php'
         )
             .then(response => response.json())
             .then(responseJson_a => {
@@ -32,10 +32,11 @@ class NewPlay extends Component {
                     <View style={{marginLeft: 20, marginTop: -130, flexDirection: 'row'}}>
                         <View>
                             <Image style={{height: 100, width: 100}}
-                                   source={{uri: "https://zmp3-photo-fbcrawler.zadn.vn/cover_video/c/4/2/a/c42ae785d99d2416ed3221d528ae4b39.jpg"}}/>
+                                   source={{uri: "https://avatar-nct.nixcdn.com/playlist/2017/11/21/a/d/c/5/1511254430140_500.jpg"}}/>
                         </View>
                         <View>
-                            <Text style={{marginLeft: 10, fontSize: 20, color: '#fff', marginTop:30}}>V-Pop</Text>
+                            <Text style={{marginLeft: 10, fontSize: 20, color: '#fff', marginTop:20}}>Nhạc Remix Hot Tháng</Text>
+                            <Text style={{marginLeft: 10, fontSize: 20, color: '#e0d2e4'}}>Binz, Orange</Text>
                         </View>
                     </View>
                 </View>
@@ -49,7 +50,7 @@ class NewPlay extends Component {
                             </View>
                             <View style={{marginLeft: 10 ,margin:10}}>
                                 <Text style={{fontSize:16}}>{item.TenBaiHat}</Text>
-                                <Text style={{fontSize:16 , color:'#888888'}}>{item.CaSi} </Text>
+                                <Text style={{fontSize:16,color:'#888888'}}>{item.CaSi} </Text>
                             </View>
 
                         </TouchableOpacity>
@@ -60,5 +61,5 @@ class NewPlay extends Component {
     }
 }
 
-export default NewPlay;
+export default NewPlatAlbum;
 const styles = StyleSheet.create({});
